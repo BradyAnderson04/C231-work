@@ -39,13 +39,28 @@ def encrypt(key, m):
 
     return encrypted_message
 
+def decrypt(key, encoded_m):
+    '''
+    function that perform xor decryption
+    key - the key generated from generator function
+    encoded_m - the message being decrypted
+    '''
+    decrypted_message = ""
+
+    # loop
+    for i in range(len(encoded_m)):
+        decrypted_message += str(XORGate(key[i], encoded_m[i]))
+
+    return decrypted_message
+
+    # return value
 
 if __name__ == "__main__":
     # data
     a = "MAKE PEACE"
     b = "DON'T MEOW"
-    c = "MEXICO"
-    d = "HISTORY"
+    c = "your not a trash cant you a trash CAN"
+    d = "I am become meme,Destroyer of shorts"
 
     """
     Part a - find length of key 
@@ -77,10 +92,10 @@ if __name__ == "__main__":
     # print(len(d_bit))
 
     # key generators - part b
-    a_key = generator(80)
-    b_key = generator(80)
-    c_key = generator(48)
-    d_key = generator(56)
+    a_key = generator(8*len(a))
+    b_key = generator(8*len(b))
+    c_key = generator(8*len(c))
+    d_key = generator(8*len(d))
     # print(len(d_key))
 
     # encrypting - part c
@@ -88,13 +103,16 @@ if __name__ == "__main__":
     enc_b = encrypt(b_key, b_bit)
     enc_c = encrypt(c_key, c_bit)
     enc_d = encrypt(d_key, d_bit)
-    # print(len(enc_d))
+    
+    # decrypting - part extra
+    dec_a = decrypt(a_key, enc_a) # should out put MAKE PEACE
+    dec_b = decrypt(b_key, enc_b) # should out put MAKE PEACE
+    dec_c = decrypt(c_key, enc_c) # should out put MAKE PEACE
+    dec_d = decrypt(d_key, enc_d) # should out put MAKE PEACE
 
     # display results
-    print("Bit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\n".format(a_bit, a_key, enc_a))
-    print("Bit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\n".format(b_bit, b_key, enc_b))
-    print("Bit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\n".format(c_bit, c_key, enc_c))
-    print("Bit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\n".format(d_bit, d_key, enc_d))
-
-
+    print("{}\n\nBit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\nDecrypted Xor: {:>}\n\nSuccessful Decryption ? {:>}\n\n\n".format(a,a_bit,a_key,enc_a,dec_a,a_bit==dec_a))
+    print("{}\n\nBit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\nDecrypted Xor: {:>}\n\nSuccessful Decryption ? {:>}\n\n\n".format(b,b_bit,b_key,enc_b,dec_b,b_bit==dec_b))
+    print("{}\n\nBit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\nDecrypted Xor: {:>}\n\nSuccessful Decryption ? {:>}\n\n\n".format(c,c_bit,c_key,enc_c,dec_c,c_bit==dec_c))
+    print("{}\n\nBit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\nDecrypted Xor: {:>}\n\nSuccessful Decryption ? {:>}\n\n\n".format(d,d_bit,d_key,enc_d,dec_d,d_bit==dec_d))
 
