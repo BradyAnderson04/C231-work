@@ -13,6 +13,11 @@ def create_bit_string(m):
     return output.replace(" ", "0")
 
 def generator(n):
+    """
+    The generator function create a key randomly of length n
+
+    n - length of the key
+    """
     key = ""
 
     for i in range(n):
@@ -32,16 +37,17 @@ def encrypt(key, m):
     key - the key generated from generator function
     m - the message being encrypted
     '''
-    encrypted_message = ""
+    # encrypted_message = ""
 
-    for i in range(len(m)):
-        encrypted_message += str(XORGate(key[i], m[i]))
+    # for i in range(len(m)):
+    #     encrypted_message += str(XORGate(key[i], m[i]))
 
-    return encrypted_message
+    return "".join([str(XORGate(key[i], m[i])) for i in range(len(m))])    
+
 
 def decrypt(key, encoded_m):
     '''
-    function that perform xor decryption
+    function that perform xor decryption -- this is the exact same as encryption method just in different function for semantics sake
     key - the key generated from generator function
     encoded_m - the message being decrypted
     '''
@@ -116,3 +122,5 @@ if __name__ == "__main__":
     print("{}\n\nBit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\nDecrypted Xor: {:>}\n\nSuccessful Decryption ? {:>}\n\n\n".format(c,c_bit,c_key,enc_c,dec_c,c_bit==dec_c))
     print("{}\n\nBit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\nDecrypted Xor: {:>}\n\nSuccessful Decryption ? {:>}\n\n\n".format(d,d_bit,d_key,enc_d,dec_d,d_bit==dec_d))
 
+    # display what XOR means
+    print("XOR Logic:\n0 0 | {}\n0 1 | {}\n1 0 | {}\n1 1 | {}\n".format(XORGate(0,0), XORGate(0,1), XORGate(1,0), XORGate(1,1)))
