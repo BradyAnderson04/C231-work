@@ -2,71 +2,79 @@
 
 import random as rn
 
-def create_bit_string(m):
-    '''
-    create a string to it's ascii binary equivalent
+class OTPEncryptor():
+    # class attributes
+    message=""
+    message_length=0
+    key=""
 
-    m - the message to be converted
-    '''
-    output = " "
-    output += ' '.join(format(ord(i), 'b') for i in m)
-    return output.replace(" ", "0")
+    def __init__(self,message):
+        self.message=message
+        self.message_length=len(message)
+        self.key=self.generator(self.message_length)
 
-def generator(n):
-    """
-    The generator function create a key randomly of length n
+    def create_bit_string(self, m):
+        '''
+        create a string to it's ascii binary equivalent
 
-    n - length of the key
-    """
-    key = ""
+        m - the message to be converted
+        '''
+        output = " "
+        output += ' '.join(format(ord(i), 'b') for i in m)
+        return output.replace(" ", "0")
 
-    for i in range(n):
-        key += str(rn.randint(0, 1))
-    
-    return key
+    def generator(self,n):
+        """
+        The generator function create a key randomly of length n
 
-def XORGate(x, y):
-    if x != y:
-        return 1
-    else:
-        return 0
+        n - length of the key
+        """
+        key = ""
 
-def encrypt(key, m):
-    '''
-    function that perform xor encryption
-    key - the key generated from generator function
-    m - the message being encrypted
-    '''
-    # encrypted_message = ""
+        for i in range(n):
+            key += str(rn.randint(0, 1))
+        
+        return key
 
-    # for i in range(len(m)):
-    #     encrypted_message += str(XORGate(key[i], m[i]))
+    def XORGate(self,x,y):
+        if x != y:
+            return 1
+        else:
+            return 0
 
-    return "".join([str(XORGate(key[i], m[i])) for i in range(len(m))])    
+    def encrypt(self,key,m):
+        '''
+        function that perform xor encryption
+        key - the key generated from generator function
+        m - the message being encrypted
+        '''
+        # encrypted_message = ""
 
+        # for i in range(len(m)):
+        #     encrypted_message += str(XORGate(key[i], m[i]))
 
-def decrypt(key, encoded_m):
-    '''
-    function that perform xor decryption -- this is the exact same as encryption method just in different function for semantics sake
-    key - the key generated from generator function
-    encoded_m - the message being decrypted
-    '''
-    decrypted_message = ""
+        return "".join([str(XORGate(key[i], m[i])) for i in range(len(m))])    
 
-    # loop
-    for i in range(len(encoded_m)):
-        decrypted_message += str(XORGate(key[i], encoded_m[i]))
+    def decrypt(self,key,encoded_m):
+        '''
+        function that perform xor decryption -- this is the exact same as encryption method just in different function for semantics sake
+        key - the key generated from generator function
+        encoded_m - the message being decrypted
+        '''
+        decrypted_message = ""
 
-    return decrypted_message
+        # loop
+        for i in range(len(encoded_m)):
+            decrypted_message += str(XORGate(key[i], encoded_m[i]))
 
-    # return value
+        return decrypted_message
 
 if __name__ == "__main__":
-    # data
+    # data -- need to chane tester code to work with class based implementation
     a = "MAKE PEACE"
     b = "DON'T MEOW"
     c = "your not a trash cant you a trash CAN"
-    d = "I am become meme,Destroyer of shorts"
+    d = "I am become meme, Destroyer of shorts"
 
     """
     Part a - find length of key 
@@ -89,20 +97,15 @@ if __name__ == "__main__":
 
     # bit strings
     a_bit = create_bit_string(a)
-    # print(a_bit)
     b_bit = create_bit_string(b)
-    # print(b_bit)
     c_bit = create_bit_string(c)
-    # print(c_bit)
     d_bit = create_bit_string(d)
-    # print(len(d_bit))
 
     # key generators - part b
-    a_key = generator(8*len(a))
+    a_key = generator(8*len(a)) # generate key length of 8 * length of string
     b_key = generator(8*len(b))
     c_key = generator(8*len(c))
     d_key = generator(8*len(d))
-    # print(len(d_key))
 
     # encrypting - part c
     enc_a = encrypt(a_key, a_bit)
@@ -111,10 +114,10 @@ if __name__ == "__main__":
     enc_d = encrypt(d_key, d_bit)
     
     # decrypting - part extra
-    dec_a = decrypt(a_key, enc_a) # should out put MAKE PEACE
-    dec_b = decrypt(b_key, enc_b) # should out put MAKE PEACE
-    dec_c = decrypt(c_key, enc_c) # should out put MAKE PEACE
-    dec_d = decrypt(d_key, enc_d) # should out put MAKE PEACE
+    dec_a = decrypt(a_key, enc_a)
+    dec_b = decrypt(b_key, enc_b)  
+    dec_c = decrypt(c_key, enc_c) 
+    dec_d = decrypt(d_key, enc_d) 
 
     # display results
     print("{}\n\nBit String: {:>}\nKey Bit: {:>}\nEncrypted Xor: {:>}\nDecrypted Xor: {:>}\n\nSuccessful Decryption ? {:>}\n\n\n".format(a,a_bit,a_key,enc_a,dec_a,a_bit==dec_a))

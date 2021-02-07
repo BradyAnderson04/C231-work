@@ -52,13 +52,18 @@ def cipher_shift(n, ascii_list):
     n - how many bits to shift by
     ascii_lits - list of ascii characters
     """
+    shift_value = n%26
+
     output_ascii = [0] * len(ascii_list)
 
     for i in range(len(ascii_list)):
-        output_ascii[i] = ascii_list[i] + n
+        output_ascii[i] = ascii_list[i] + shift_value
 
+        #TODO:
+        # change logic to work with negative values too
+        # also verify z maps properly 
         if(output_ascii[i] > 90):
-            # when greater than 90 subtract 26
+            # when greater than 90 subtract 26 - 
             output_ascii[i] -= 26
     
     return output_ascii
@@ -86,7 +91,7 @@ def display_cipher_shift(ascii_list):
 
 if __name__ == '__main__':
     # data for testing
-    a = "Olivia simping for tyler"
+    a = "Olivia simping for tylerz"
     b = "Drywall is drywall"
     c = "Hello drywall"
 
