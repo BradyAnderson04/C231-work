@@ -33,6 +33,15 @@ def display_dict(freq_dict):
     for key in freq_dict:
         print(key,":",freq_dict[key])
 
+def generate_probability_key(prob_table, length, encoding, message):
+    """
+    Given a probability and encoding along with a message generate a random key
+    that follows the bias provided
+
+    TODO:
+    Implement when I have time this weekend
+    """
+
 if __name__ == '__main__':
 
     freq, order = flip_n_times(40)
