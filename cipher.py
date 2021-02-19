@@ -37,143 +37,156 @@ import math
 # constants
 KEY_LENGTH = 4
 
+# create a class
 
-def convert_to_ascii(m):
-    '''
-    takes a message and makes it the equivalent ascii value
+class CeasarCipher():
 
-    inputs:
-    m - string 
-    output:
-    list - a list of numbers
-    '''
-    # clean input to only be capital letters
-    m = m.upper().replace(" ", "")
+    def __init__(self, shift):
+        pass
 
-    # output storing
-    ascii_list = []
+    def convert_to_ascii(m):
+        '''
+        takes a message and makes it the equivalent ascii value
 
-    for i in range(len(m)):
-        # remove any punctuation or other things we don't want
-        temp = ord(m[i])
-        # only append values from A - Z inc
-        if(temp >= 65 and temp <=90):
-            ascii_list.append(ord(m[i]))
+        inputs:
+        m - string 
+        output:
+        list - a list of numbers
+        '''
+        # clean input to only be capital letters
+        m = m.upper().replace(" ", "")
 
-    return ascii_list
+        # output storing
+        ascii_list = []
 
-def cipher_shift(n, ascii_list):
-    """
-    shift the cipher over n bits
+        for i in range(len(m)):
+            # remove any punctuation or other things we don't want
+            temp = ord(m[i])
+            # only append values from A - Z inc
+            if(temp >= 65 and temp <=90):
+                ascii_list.append(ord(m[i]))
 
-    cipher - shifts n letters 
+        return ascii_list
 
-    65 - 90
+    def cipher_shift(n, ascii_list):
+        """
+        shift the cipher over n bits
 
-    inputs:
-    n - how many bits to shift by
-    ascii_lits - list of ascii characters
-    """
-    shift_value = n%26 # 0 - 25
+        cipher - shifts n letters 
 
-    output_ascii = [0] * len(ascii_list)
+        65 - 90
 
-    for i in range(len(ascii_list)):
-        temp = ascii_list[i] + shift_value
+        inputs:
+        n - how many bits to shift by
+        ascii_lits - list of ascii characters
+        """
+        shift_value = n%26 # 0 - 25
 
-        if(temp > 90):
-            # when greater than 90 subtract 26 - 
-            temp -= 26
-        if(temp < 65):
-            # when you do a negative shift
-            temp += 26
+        output_ascii = [0] * len(ascii_list)
 
-        output_ascii[i] = temp
-    
-    return output_ascii
+        for i in range(len(ascii_list)):
+            temp = ascii_list[i] + shift_value
 
-def automate_ceasar_cipher(m, shift):
-    # process won't work due to the order of key gens -- so I'll just call these in the order I need in function -- depreciated
-    ascii_list = convert_to_ascii(m)
+            if(temp > 90):
+                # when greater than 90 subtract 26 - 
+                temp -= 26
+            if(temp < 65):
+                # when you do a negative shift
+                temp += 26
 
-    return cipher_shift(shift, ascii_list)
-
-def display_cipher_shift(ascii_list):
-    """
-    shift the cipher over n bits
-
-    cipher - shifts n letters 
-
-    inputs:
-    ascii_lits - list of ascii characters
-    output:
-    string representation
-    """
-
-    output = ""
-
-    for i in ascii_list:
-        output += chr(i)
-
-    return output
-
-def frequency_analysis(ascii_list):
-    # create a histogram of the ascii list values
-    freq_dict = {}
-
-    for val in ascii_list:
-        if(freq_dict.get(chr(val)) is not None):
-            freq_dict[chr(val)] += 1 # increment value
-        else:
-            freq_dict[chr(val)] = 1 # create and init value
-
-    return freq_dict
-
-def display_dict(freq_dict):
-    # iterate over keys and print the key value pair
-    for key in sorted(freq_dict):
-        print(key,":",freq_dict[key])
-
-def v_cipher(key_size, message):
-    '''
-    iterate over key - execute cipher shift for key size bits of message
-
-    ex: HELLOWORLD
-    key = 3 long
-
-    HEL LOW WOR LD_
-    
-    return the output message and shift values
-
-    todo:
-
-    program is not accurate there is a lengt of message difference
-    '''
-    # calc how many times a new key will be made
-    m = convert_to_ascii(message)
-    loop_count = math.ceil(len(m) / key_size)
-
-    output = [] # message encoded
-    shift_outputs = [] # list of shift values
-    
-    for i in range(loop_count):
-        # genearte a shift value
-        temp_shift = rn.randint(0, 26) # generate val from 0 - 26 inc.
-        # perform cipher shift on substring
-
-        # define message substring to use
-        bound_s = (i) * key_size
-        bound_e = (i+1) * key_size
-        m_sub = m[bound_s: bound_e]
-
-        output_ascii = cipher_shift(temp_shift, m_sub) # generate ascii of length key_size
+            output_ascii[i] = temp
         
-        # save to output
-        shift_outputs.append(temp_shift)
-        [output.append(x) for x in output_ascii]
-    
-    # return output
-    return output, shift_outputs
+        return output_ascii
+
+    def automate_ceasar_cipher(m, shift):
+        # process won't work due to the order of key gens -- so I'll just call these in the order I need in function -- depreciated
+        ascii_list = convert_to_ascii(m)
+
+        return cipher_shift(shift, ascii_list)
+
+    def display_cipher_shift(ascii_list):
+        """
+        shift the cipher over n bits
+
+        cipher - shifts n letters 
+
+        inputs:
+        ascii_lits - list of ascii characters
+        output:
+        string representation
+        """
+
+        output = ""
+
+        for i in ascii_list:
+            output += chr(i)
+
+        return output
+
+    def frequency_analysis(ascii_list):
+        # create a histogram of the ascii list values
+        freq_dict = {}
+
+        for val in ascii_list:
+            if(freq_dict.get(chr(val)) is not None):
+                freq_dict[chr(val)] += 1 # increment value
+            else:
+                freq_dict[chr(val)] = 1 # create and init value
+
+        return freq_dict
+
+    def display_dict(freq_dict):
+        # iterate over keys and print the key value pair
+        for key in sorted(freq_dict):
+            print(key,":",freq_dict[key])
+
+
+class VCipher(ceasar_cipher):
+        
+        __init__(self, key_size):
+            pass
+        
+        def v_cipher(key_size, message):
+        '''
+            iterate over key - execute cipher shift for key size bits of message
+
+            ex: HELLOWORLD
+            key = 3 long
+
+            HEL LOW WOR LD_
+            
+            return the output message and shift values
+
+            todo:
+
+            program is not accurate there is a lengt of message difference
+        '''
+        # calc how many times a new key will be made
+        m = convert_to_ascii(message)
+        loop_count = math.ceil(len(m) / key_size)
+
+        output = [] # message encoded
+        shift_outputs = [] # list of shift values
+        
+        for i in range(loop_count):
+            # genearte a shift value
+            temp_shift = rn.randint(0, 26) # generate val from 0 - 26 inc.
+            # perform cipher shift on substring
+
+            # define message substring to use
+            bound_s = (i) * key_size
+            bound_e = (i+1) * key_size
+            m_sub = m[bound_s: bound_e]
+
+            output_ascii = cipher_shift(temp_shift, m_sub) # generate ascii of length key_size
+            
+            # save to output
+            shift_outputs.append(temp_shift)
+            [output.append(x) for x in output_ascii]
+        
+        # return output
+        return output, shift_outputs
+
 
 if __name__ == '__main__':
     # data for testing
@@ -234,29 +247,28 @@ if __name__ == '__main__':
 
     ceazar = cipher_shift(random_shift, ascii_data)
 
-    print("Q7 Part A\n" + "_"*100)
-    print("Ceazar Cipher:", display_cipher_shift(ceazar))
-    print("Shift Values:", random_shift)
+    # print("Q7 Part A\n" + "_"*100)
+    # print("Ceazar Cipher:", display_cipher_shift(ceazar))
+    # print("Shift Values:", random_shift)
     
-    # part b - vigenere cipher:
-    random_key = int(rn.randint(0, 5))
+    # # part b - vigenere cipher:
+    # random_key = int(rn.randint(0, 5))
 
-    vignenere = v_cipher(random_key, dream_speech)
+    # vignenere = v_cipher(random_key, dream_speech)
 
 
-    print("\nQ7 Part B\n" + "_"*100)
-    print("Output:", display_cipher_shift(vignenere[0]))
-    print("Keys_size:", random_key)
-    print("Shift Values:", vignenere[1])
+    # print("\nQ7 Part B\n" + "_"*100)
+    # print("Output:", display_cipher_shift(vignenere[0]))
+    # print("Keys_size:", random_key)
+    # print("Shift Values:", vignenere[1])
 
     # part c - frequency count for both -- ordering keys from
-    print("\nQ7 Part C\n" + "_"*100)
-    c_freq_analysis = frequency_analysis(ceazar)
-    v_freq_analysis = frequency_analysis(vignenere[0])
+    # print("\nQ7 Part C\n" + "_"*100)
+    # c_freq_analysis = frequency_analysis(ceazar)
+    # v_freq_analysis = frequency_analysis(vignenere[0])
 
-    print("The frequency analysis of ceazar cipher shift -- notice the higher concentration of values")
-    display_dict(c_freq_analysis)
+    # print("The frequency analysis of ceazar cipher shift -- notice the higher concentration of values")
+    # display_dict(c_freq_analysis)
 
-    print("The frequency analysis of vigenere shift -- notice the lower concentration of values")
-    display_dict(v_freq_analysis)
-
+    # print("The frequency analysis of vigenere shift -- notice the lower concentration of values")
+    # display_dict(v_freq_analysis)
