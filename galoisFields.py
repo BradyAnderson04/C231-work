@@ -34,13 +34,18 @@ class Galois_Field():
     def to_string(self):
         print(self.elements)
 
-    def calc_additive_inverse(self):
+    def calc_additive_inverse(self, x):
         '''
         given the p value find the additive inverse that satisfies the relationship
 
-
+        there is an additive inverse when a + -a = 0 mod n
         '''
-        pass
+        x = x % self.n
+        if(x == 0):
+            return 0
+        else:
+            return self.n - x 
+        
 
     def calc_multiplicative_inverse(self, x):
         '''
@@ -56,14 +61,15 @@ class Galois_Field():
         gcd = self.gcd(x)
 
         if(gcd != 1):
-            # there is no inverse value for this x and p
+            # there is no inverse value for this x and p when gcd != 1
             return None
         else:
             # inverse value exists, return the formula solution
             t = 1
-            # find t value
+            # find t value that divides evenly
             while((self.n * t + 1) % x != 0):
                 t += 1
+            # fml to calculate inverse
             return ((self.n * t  + 1) / x) % self.n
 
     def gcd(self, x):
@@ -86,7 +92,17 @@ class Galois_Field():
     
 
 if __name__ == '__main__':
+    # create a test object for problem 6
     test = Galois_Field(113)
 
-    for i in range(1, 113):
-        print(f"Input: {i}, Multiplicative Inverse: {test.calc_multiplicative_inverse(i)}")
+    # testing multiplicative inverse of galois field
+    print("Multiplicative Inverse:")
+    for i in range(1, test.n):
+        temp = test.calc_multiplicative_inverse(i)
+        print(f"Input: {i}, Multiplicative Inverse:{temp} Result: {i} * {temp} % {test.n} = {(i * temp) % test.n}")
+
+    # testing additive inverse of galois field
+    print("\n\nAdditive Inverse:")
+    for j in range(0, test.n):
+        temp = test.calc_additive_inverse(j)
+        print(f"Input: {i}, Additive Inverse: {temp} Result: {j} + {temp} = {(j + temp) % test.n} mod {test.n}")
