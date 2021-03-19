@@ -100,8 +100,6 @@ class Galois_Field():
         
         return val
 
-    
-
 if __name__ == '__main__':
     # create a test object for problem 6
     test = Galois_Field(113)
@@ -110,10 +108,10 @@ if __name__ == '__main__':
     print("Multiplicative Inverse:")
     for i in range(1, test.n):
         temp = test.calc_multiplicative_inverse(i)
-        print(f"Input: {i}, Multiplicative Inverse:{temp} Result: {i} * {temp} % {test.n} = {(i * temp) % test.n}")
+        print(f"Input: {i}, Multiplicative Inverse:{temp} Result: {i} * {temp} % {test.n} = {(i * temp) % test.n} mod {test.n}")
 
     # testing additive inverse of galois field
     print("\n\nAdditive Inverse:")
     for j in range(0, test.n):
         temp = test.calc_additive_inverse(j)
-        print(f"Input: {i}, Additive Inverse: {temp} Result: {j} + {temp} = {(j + temp) % test.n} mod {test.n}")
+        print(f"Input: {j}, Additive Inverse: {temp} Result: {j} + {temp} = {(j + temp) % test.n} mod {test.n}")
