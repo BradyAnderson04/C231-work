@@ -86,15 +86,7 @@ class Galois_Field():
     
 
 if __name__ == '__main__':
-    test = Galois_Field(8)
+    test = Galois_Field(113)
 
-    print(test.gcd(0))
-
-    print(f"Input: 0, Multiplicative Inverse: {test.calc_multiplicative_inverse(0)}")
-    print(f"Input: 1, Multiplicative Inverse: {test.calc_multiplicative_inverse(1)}")
-    print(f"Input: 2, Multiplicative Inverse: {test.calc_multiplicative_inverse(2)}")
-    print(f"Input: 3, Multiplicative Inverse: {test.calc_multiplicative_inverse(3)}")
-    print(f"Input: 4, Multiplicative Inverse: {test.calc_multiplicative_inverse(4)}")
-    print(f"Input: 5, Multiplicative Inverse: {test.calc_multiplicative_inverse(5)}")
-    print(f"Input: 6, Multiplicative Inverse: {test.calc_multiplicative_inverse(6)}")
-    print(f"Input: 7, Multiplicative Inverse: {test.calc_multiplicative_inverse(7)}")
+    for i in range(1, 113):
+        print(f"Input: {i}, Multiplicative Inverse: {test.calc_multiplicative_inverse(i)}")
