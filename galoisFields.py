@@ -4,28 +4,31 @@ Date: 3/19/2021
 Description: 
 A program that calculates some properties of galois fields
 
-priority:
-additive and multiplicative inverse
+COMPLETE:
+    priority:
+        additive and multiplicative inverse
 
-Non-priority Operations of fields:
-Addition operations:
-    Closure
-    associative
-    commutative
+TODO:
+    Non-priority Operations of fields:
+    Addition operations:
+        Closure
+        associative
+        commutative
 
-Multiplication operations:
-    closure
-    associative
-    distributive
-    commutative
-    identity
-    no zero divisors
+    Multiplication operations:
+        closure
+        associative
+        distributive
+        commutative
+        identity
+        no zero divisors
 '''
 import math
 
 class Galois_Field():
 
     def __init__(self, p, m=1):
+        # constructor of a Galois field object
         self.p = p
         self.m = m
         self.n = int(math.pow(self.p, self.m))
@@ -40,12 +43,14 @@ class Galois_Field():
 
         there is an additive inverse when a + -a = 0 mod n
         '''
+        # fix value to be in proper range
         x = x % self.n
+        # base case
         if(x == 0):
             return 0
         else:
+            # case where valid value
             return self.n - x 
-        
 
     def calc_multiplicative_inverse(self, x):
         '''
@@ -58,6 +63,7 @@ class Galois_Field():
 
         using t = 1 for simplicity sake
         '''
+        # calc base condition
         gcd = self.gcd(x)
 
         if(gcd != 1):
@@ -78,11 +84,16 @@ class Galois_Field():
 
         gcd is the greatest integer that divides both numbers included
         '''
+        # normalize value in the correct range
         x = x % self.n
+        # edge case 
         if(x == 0):
             return 0
+        # default value
         val = 0
+        # iterate through to id the gcd
         for i in range(1, int(math.pow(self.p,self.m))):
+            # check for remainder
             y, z = self.n%i, x%i
             if(y == 0 and z == 0):
                 val = i
