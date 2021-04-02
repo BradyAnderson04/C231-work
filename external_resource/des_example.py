@@ -1,5 +1,7 @@
 # This code is contributed by Aditya Jain and taken from geeksforgeeks to help me better understand the DES round function
 
+# code for question 7
+
 # Hexadecimal to binary conversion 
 def hex2bin(s): 
     mp = {'0' : "0000",  

@@ -23,6 +23,9 @@ TODO:
         identity
         no zero divisors
 '''
+
+# code for assignment 6
+
 import math
 
 class Galois_Field():
@@ -100,18 +103,49 @@ class Galois_Field():
         
         return val
 
+# some helper functions
+def generate_field_elements(p, n):
+    for l in range(p):
+        for i in range(p):
+            for j in range(p):
+                for k in range(p):
+                    print(f"{k}x^3+{j}x^2+{i}x+{l}")
+                    # print(f"({l} {i} {j} {k})")
+
+def xor(a, b): 
+    ans = "" 
+    for i in range(len(a)): 
+        if a[i] == b[i]: 
+            ans = ans + "0"
+        else: 
+            ans = ans + "1"
+    return ans 
+
+
 if __name__ == '__main__':
     # create a test object for problem 6
     test = Galois_Field(113)
 
+    a = "11111111"
+    b = "10000010"
+    c = "00100000"
+    d = "00000000"
+
+    print(xor(xor(b, c), d))
+    print(xor(xor(a, c), d))
+    print(xor(xor(a, b), d))
+    print(xor(xor(a, b), c))
+
     # testing multiplicative inverse of galois field
-    print("Multiplicative Inverse:")
-    for i in range(1, test.n):
-        temp = test.calc_multiplicative_inverse(i)
-        print(f"Input: {i}, Multiplicative Inverse:{temp} Result: {i} * {temp} % {test.n} = {(i * temp) % test.n} mod {test.n}")
+    # print("Multiplicative Inverse:")
+    # for i in range(1, test.n):
+    #     temp = test.calc_multiplicative_inverse(i)
+    #     print(f"Input: {i}, Multiplicative Inverse:{temp} Result: {i} * {temp} % {test.n} = {(i * temp) % test.n} mod {test.n}")
 
     # testing additive inverse of galois field
-    print("\n\nAdditive Inverse:")
-    for j in range(0, test.n):
-        temp = test.calc_additive_inverse(j)
-        print(f"Input: {j}, Additive Inverse: {temp} Result: {j} + {temp} = {(j + temp) % test.n} mod {test.n}")
+    # print("\n\nAdditive Inverse:")
+    # for j in range(0, test.n):
+    #     temp = test.calc_additive_inverse(j)
+    #     print(f"Input: {j}, Additive Inverse: {temp} Result: {j} + {temp} = {(j + temp) % test.n} mod {test.n}")
+
+    # generate_field_elements(2, 4)
