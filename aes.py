@@ -83,7 +83,6 @@ def dec2bin(num):
 
 def leftShift(binary):
     # left shift
-    print(len(binary[:8]))
     s = binary[8:] + binary[:8]
     # convert to hex
     return bin2hex(s)
@@ -95,7 +94,7 @@ def xor(a, b):
             ans = ans + "0"
         else: 
             ans = ans + "1"
-    return ans 
+    return ans
 
 if __name__ == '__main__':
     w0 = "2B7E1516"
@@ -110,14 +109,20 @@ if __name__ == '__main__':
 
     print(f"left shift of w3 is {leftShift(hex2bin(w3))}")
 
-    print(f"g(w3) is {hex2bin('8A84EB01')}")
+    gw3 = xor(hex2bin('8A84EB01'), hex2bin('01000000'))
+    print(f"g(w3) is {gw3}")
 
-    w4 = xor('10001010100001001110101100000001', '00101011011111100001010100010110')
+    w4 = xor(gw3, hex2bin(w0))
     w5 = xor(w4, hex2bin(w1))
     w6 = xor(w5, hex2bin(w2))
     w7 = xor(w6, hex2bin(w3))
 
-    print(f'w4 final result is {w4} w/ len {len(w4)}')
-    print(f'w5 final result is {w5} w/ len {len(w5)}')
-    print(f'w6 final result is {w6} w/ len {len(w6)}')
-    print(f'w7 final result is {w7} w/ len {len(w7)}')
+    print(f"w4 = {gw3} xor {hex2bin(w0)} = {w4}")
+    print(f"w4 = {w4} xor {hex2bin(w1)} = {w5}")
+    print(f"w4 = {w5} xor {hex2bin(w2)} = {w6}")
+    print(f"w4 = {w6} xor {hex2bin(w3)} = {w7}")
+
+    print(f'w4 final result is {w4} w/ len {len(w4)}, hex is {bin2hex(w4)}')
+    print(f'w5 final result is {w5} w/ len {len(w5)}, hex is {bin2hex(w5)}')
+    print(f'w6 final result is {w6} w/ len {len(w6)}, hex is {bin2hex(w6)}')
+    print(f'w7 final result is {w7} w/ len {len(w7)}, hex is {bin2hex(w7)}')
