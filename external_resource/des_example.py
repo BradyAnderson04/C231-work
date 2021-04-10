@@ -212,9 +212,13 @@ def encrypt(pt, rkb, rk):
         
         # Straight D-box: After substituting rearranging the bits   
         sbox_str = permute(sbox_str, per, 32) 
+        print("Round ", i + 1, " After substitute: ", bin2hex(left), " ", bin2hex(right), " ", rk[i]) 
+        print("Round ", i + 1, " After substitute", (left), " ", (right), " ", rk[i]) 
         # XOR left and sbox_str 
         result = xor(left, sbox_str) 
         left = result 
+        print("Round ", i + 1, " after xor:", bin2hex(left), " ", bin2hex(right), " ", rk[i]) 
+        print("Round ", i + 1, " after xor:", (left), " ", (right), " ", rk[i])
         # Swapper 
         if(i != 15): 
             left, right = right, left  
@@ -228,8 +232,8 @@ def encrypt(pt, rkb, rk):
     cipher_text = permute(combine, final_perm, 64) 
     return cipher_text 
   
-pt = bin2hex('0000000000000000000000000000000000000000000000000000000000000000')
-key = bin2hex('0000000000000000000000000000000000000000000000000000000000000000')
+pt = bin2hex('1111111111111111111111111111111111111111111111111111111111111111')
+key = bin2hex('1111111111111111111111111111111111111111111111111111111111111111')
   
 # Key generation 
 # --hex to binary 

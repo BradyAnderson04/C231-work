@@ -139,6 +139,17 @@ def mixcol(a, b):
     print(f'the output of the mod multiplication is \n{output[0]}\n{output[1]}\n{output[2]}\n{output[3]}')
     return output2
 
+def euclid_algo(a, b):
+    '''
+    simple implementation of euclid algorithm
+    '''
+    r = a % b
+
+    if(r > 0):
+        return euclid_algo(b, r)
+    else:
+        return b
+
 if __name__ == '__main__':
     # mixcol data setup
     w0 = "2B7E1516"
@@ -176,43 +187,60 @@ if __name__ == '__main__':
          ['59', 'C4', '62', '68'],
          ['8A', '84', 'EB', '01']]
 
+    c = [['63', '63', '63', '63'],
+         ['63', '63', '63', '63'],
+         ['63', '63', '63', '63'],
+         ['63', '63', '63', '63']]
+
     b = [[2, 3, 1, 1],
          [1, 2, 3, 1],
          [1, 1, 2, 3],
          [3, 1, 1, 2]]
 
-    result = mixcol(a, b)
-    print(f'the output of the mod multiplication is \n{result[0]}\n{result[1]}\n{result[2]}\n{result[3]}')
+    # result = mixcol(a, b)
+    # print(f'the output of the mod multiplication is \n{result[0]}\n{result[1]}\n{result[2]}\n{result[3]}')
 
-    p = '1000110110'
-    pbase = '100011011'
-    print(xor(p, '1000110000'))
-    print(xor(p, '1101000101'))
-    print(xor(pbase, '110110011'))
-    print(xor(p, '1111010100'))
+    result2 = mixcol(c, b)
+    print(f'the output of the mod multiplication is \n{result2[0]}\n{result2[1]}\n{result2[2]}\n{result2[3]}')
+    print(xor('100011011', '101010001'))
+    print(xor('100011011', '100000101'))
+    print(xor('100011011', '101110001'))
 
-    print()
+    # p = '1000110110'
+    # pbase = '100011011'
+    # print(xor(p, '1000110000'))
+    # print(xor(p, '1101000101'))
+    # print(xor(pbase, '110110011'))
+    # print(xor(p, '1111010100'))
 
-    print(xor(p, '1011110001'))
-    print(xor(p, '1011101111'))
-    print(xor(p, '1000110000'))
+    # print()
 
-    print()
+    # print(xor(p, '1011110001'))
+    # print(xor(p, '1011101111'))
+    # print(xor(p, '1000110000'))
 
-    print(xor(pbase, '110100010'))
-    print(xor(p, '111011001'))
-    print(xor(p, '1011100111'))
-    print(xor(pbase, '101001110'))
+    # print()
 
-    print()
+    # print(xor(pbase, '110100010'))
+    # print(xor(p, '111011001'))
+    # print(xor(p, '1011100111'))
+    # print(xor(pbase, '101001110'))
 
-    print(xor(p, '1100101001'))
+    # print()
 
-    message = "11000000100111010001010110001111110001100011011011000000010110001001110111101111000101101010101000010000111011011111000101110101"
-    print(len(message))
+    # print(xor(p, '1100101001'))
 
-    print(xor(message, w4+w5+w6+w7))
+    # message = "11000000100111010001010110001111110001100011011011000000010110001001110111101111000101101010101000010000111011011111000101110101"
+    # print(len(message))
 
-    print(bin2hex("01000001001000101110010110011111010110001111001101010001001000001001101001111111101100001111110000010011110000011101100101111111"))
+    # print(xor(message, w4+w5+w6+w7))
+
+    # print(bin2hex("01000001001000101110010110011111010110001111001101010001001000001001101001111111101100001111110000010011110000011101100101111111"))
 
 
+    a = euclid_algo(1227, 132)
+    b = euclid_algo(2048, 128)
+    c = euclid_algo(44235, 3425)
+    d = euclid_algo(4016, 1897)
+
+    print(a, b, c, d)
